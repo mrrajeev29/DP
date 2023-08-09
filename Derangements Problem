@@ -1,0 +1,23 @@
+#define mod 1000000007
+#include <vector>
+long long int Solve(int n)
+{
+    vector<long long int>dp(n+1,0);
+    dp[1]=0;
+    dp[2]=1;
+    for(int i=3;i<=n;i++)
+    {
+        long long int a=dp[i-1]%mod;
+        long long int b=dp[i-2]%mod;
+        long long int s=(a+b)%mod;
+        long long int ans=((i-1)*s)%mod;
+        dp[i]=ans;
+    }
+    return dp[n];
+}
+long long int countDerangements(int n) {
+    return Solve(n);    
+}
+
+
+//Dp function  :-   f(n)=(n-1)*(f(n-1)+f(n-2))
