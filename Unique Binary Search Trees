@@ -1,0 +1,30 @@
+Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n.
+
+ 
+
+Example 1:
+
+
+Input: n = 3
+Output: 5
+Example 2:
+
+Input: n = 1
+Output: 1
+Code :-
+
+
+def Fact(dp,n):
+    if(n==0 or n==1):
+        return 1
+    if (dp[n-1]!=-1):
+        return dp[n-1]
+    dp[n-1]=n*Fact(dp,n-1)  
+    return dp[n-1]
+class Solution:
+    def numTrees(self, n: int) -> int:
+        dp=[]
+        for i in range(2*n):
+            dp.append(-1)
+        k=Fact(dp,2*n)/(Fact(dp,n+1)*Fact(dp,n))
+        return int(k)
