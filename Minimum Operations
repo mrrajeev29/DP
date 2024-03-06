@@ -1,0 +1,89 @@
+Minimum Operations
+EasyAccuracy: 60.02%Submissions: 96K+Points: 2
+Internship Alert
+New month-> Fresh Chance to top the leaderboard and get SDE Internship! 
+
+banner
+Given a number N. Find the minimum number of operations required to reach N starting from 0. You have 2 operations available:
+
+Double the number
+Add one to the number
+Example 1:
+
+Input:
+N = 8
+Output: 4
+Explanation: 
+0 + 1 = 1 --> 1 + 1 = 2 --> 2 * 2 = 4 --> 4 * 2 = 8.
+Example 2:
+
+Input: 
+N = 7
+Output: 5
+Explanation: 
+0 + 1 = 1 --> 1 + 1 = 2 --> 1 + 2 = 3 --> 3 * 2 = 6 --> 6 + 1 = 7.
+
+
+code :- 
+
+
+
+
+
+
+
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution
+{
+  public:
+    int minOperation(int n)
+    {
+        if(n==1)
+        {
+            return 1;
+        }
+        if (n==2)
+        {
+            return 2;
+        }
+        if(n==3)
+        {
+            return 3;
+        }
+        vector<int>dp(n+1,0);
+        dp[1]=1;
+        dp[2]=2;
+        dp[3]=3;
+        for(int i=4;i<=n;i++)
+        {
+            if(i%2!=0)
+            {
+                dp[i]=min(1+dp[i-1], 2+dp[(i-1)/2]);
+            }
+            else
+            {
+                dp[i]=min(1+dp[i-1],1+dp[i/2]);
+            }
+        }
+        return dp[n];
+    }
+};
+
+//{ Driver Code Starts.
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	    {
+	        int n;
+	        cin>>n;
+	        Solution ob;
+	        cout<<ob.minOperation(n)<<endl;
+	    }
+}
+// } Driver Code Ends
